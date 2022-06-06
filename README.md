@@ -1,8 +1,8 @@
-# Data-Active Pre-training of Graph Neural Networks
+# Better with Less: Data-Active Pre-training of Graph Neural Networks
 
 ## About
 
-This project is the implementation of the NIPS'22 paper "Data-Active Pre-training of Graph Neural Networks"
+This project is the implementation of the NIPS'22 paper "Better with Less: Data-Active Pre-training of Graph Neural Networks"
 
 ## Dependencies
 The script has been tested running under Python 3.7.10, with the following packages installed (along with their dependencies):
@@ -35,7 +35,6 @@ Pre-training datasets is stored in `data.bin`. And the datasets can be download 
 
 ```bash
 python train_al.py \
-  --gap <maximal period> \
   --model-path <saved file> \
   --threshold <threshold for sampling >
   --tb-path <tensorboard file> \
@@ -47,7 +46,6 @@ python train_al.py \
 
 ```bash
 python train_al.py \
-  --gap 6 \
   --threshold 3 \
   --model-path saved \
   --tb-path tensorboard  \

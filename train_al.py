@@ -72,7 +72,7 @@ def parse_option():
     parser.add_argument("--limit", type=int, default=5000, help="maximal sampling number per worker")
     parser.add_argument("--exp", type=str, default="Pretrain")
     parser.add_argument("--dgl_file", type=str, default="/data/syf/gcc_modified/add_all_ordered.bin")
-    parser.add_argument("--gap", type=int, default=6, help="maximal period")
+    parser.add_argument("--max_period", type=int, default=6, help="maximal period")
 
     parser.add_argument("--threshold", type=float, default=3, help="threshold setting")
     parser.add_argument("--lay", type=int, default=2, help="layer number")
@@ -786,7 +786,7 @@ def main(args):
         previous_model = load_model(args, epoch - 1)
         if train_dataset.check_uncertainty(previous_model, contrast, epoch, ) == True:
             break
-        if epoch % args.gap == 0 or epoch == 1:
+        if epoch % args.max_period == 0 or epoch == 1:
             if epoch > args.init or epoch == 1:
                 if len(train_dataset.all[0]) <= max_num or train_dataset.check_current_uncertainty(previous_model,
                                                                                              contrast, epoch, ) == True:
