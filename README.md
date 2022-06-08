@@ -12,7 +12,8 @@ The script has been tested running under Python 3.7.10, with the following packa
 - `pip install -r requirements.txt`
 - `conda install -c conda-forge rdkit=2019.09.2`
 
-In addition, CUDA 10.0 has been used in our project. Although not all dependen  cies are mentioned in the installation instruction links above, you can find most of the libraries in the package repository of a regular Linux distribution
+In addition, CUDA 10.0 has been used in our project. Although not all dependencies are mentioned in the installation instruction links above, you can find most of the libraries in the package repository of a regular Linux distribution
+
 
 ## File folders
 
@@ -24,22 +25,40 @@ In addition, CUDA 10.0 has been used in our project. Although not all dependen  
 
 `gcc&utils`: contains the code of model.
 
+
 ## Usage: How to run the code
 We divide it into 3 steps (1) Pre-training/Finetuning (2) Evaluating (3) Analyze the performance.
 
 ### 1.Pre-training / Fine-tuning
 
-Pre-training datasets is stored in `data.bin`. And the datasets can be download through [website](https://drive.google.com/file/d/1kbOciSHXSOAFV7X1CuL_nm9_2sxKeDfU/view).
+Before running the actual pretraining commands, the code requires you to download the dataset. pre-training datasets is stored in `data.bin`. And the datasets can be download through [website](https://drive.google.com/file/d/1kbOciSHXSOAFV7X1CuL_nm9_2sxKeDfU/view).
 
 **1.1 Pretraining**
+
 
 ```bash
 python train_al.py \
   --model-path <saved file> \
-  --threshold <threshold for sampling >
+  --threshold <uncertainty threshold for choosing samples >
   --tb-path <tensorboard file> \
   --dgl_file <dataset in bin format> \
   --moco
+```
+For more detail, the help information of the main script can be obtain by executing command.
+
+```bash
+optional arguments:
+  --max_period MAX_PERIOD
+                        maximal period
+  --threshold THRESHOLD
+                        uncertainty threshold for choosing samples
+  --threshold_g THRESHOLD_G
+                        threshold for moving to a new graph
+  --lay LAY             layer number
+  --ewc_rate EWC_RATE   weight for regularization
+  --regular REGULAR     whether there is regularization
+  --random RANDOM       whether there is a random selection
+  --init INIT           init epoch for training
 ```
 
 **Demo:**	
@@ -55,7 +74,7 @@ python train_al.py \
 
 **1.2 Fine-tuning**
 
-**Finetune APT on all downstream datasets in the background:**
+To Finetune APT on all downstream datasets in the background:
 
 ```
 nohup bash scripts/evaluate_generate.sh <saved file> > <log file> 2>&1 &
@@ -69,7 +88,7 @@ nohup bash scripts/evaluate_generate.sh saved > result.out 2>&1 &
 
 ### 2.Evaluating
 
-**2.1 Evaluate without Fine-tuning on all downstream datasets in the background:**
+**2.1 Evaluate without fine-tuning on all downstream datasets in the background:**
 
 ```
 nohup bash evaluate.sh <load path> <gpu> > <log file> 2>&1 &
@@ -82,7 +101,7 @@ nohup bash scripts/evaluate.sh saved 0 > log.out 2>&1 &
 ```
 
 
-**2.2 Evaluate after Fine-tuning on all downstream datasets in the background:**
+**2.2 Evaluate after fine-tuning on all downstream datasets in the background:**
 
 ```
 nohup bash evaluate_finetune.sh <load path> <gpu> > <log file> 2>&1 &

@@ -74,13 +74,14 @@ def parse_option():
     parser.add_argument("--dgl_file", type=str, default="/data/syf/gcc_modified/add_all_ordered.bin")
     parser.add_argument("--max_period", type=int, default=6, help="maximal period")
 
-    parser.add_argument("--threshold", type=float, default=3, help="threshold setting")
+    parser.add_argument("--threshold", type=float, default=3, help="uncertainty threshold for choosing samples")
+    parser.add_argument("--threshold_g", type=float, default=3.5, help="threshold for moving to a new graph")
     parser.add_argument("--lay", type=int, default=2, help="layer number")
-    parser.add_argument("--ewc_rate", type=int, default=10, help="layer number")
+    parser.add_argument("--ewc_rate", type=int, default=10, help="weight for regularization")
     parser.add_argument("--bestf", type=float, default=0.99, help="bestf")
-    parser.add_argument("--regular", type=int, default=1, help="whether")
-    parser.add_argument("--random", type=int, default=0, help="bestf")
-    parser.add_argument("--init", type=int, default=0, help="bestf")
+    parser.add_argument("--regular", type=int, default=1, help="whether there is regularization")
+    parser.add_argument("--random", type=int, default=0, help="whether there is a random selection")
+    parser.add_argument("--init", type=int, default=0, help="init epoch for training")
     # dataset definition
     parser.add_argument("--dataset", type=str, default="dgl",
                         choices=["dgl", "wikipedia", "blogcatalog", "usa_airport", "brazil_airport", "europe_airport",
