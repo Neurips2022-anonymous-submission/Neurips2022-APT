@@ -49,16 +49,16 @@ For more detail, the help information of the main script can be obtain by execut
 ```bash
 optional arguments:
   --max_period MAX_PERIOD
-                        maximal period
+                        maximal period(default:6)
   --threshold THRESHOLD
-                        uncertainty threshold for choosing samples
+                        uncertainty threshold for choosing samples(default:3)
   --threshold_g THRESHOLD_G
-                        threshold for moving to a new graph
+                        threshold for moving to a new graph(default:3.5)
   --lay LAY             layer number
-  --ewc_rate EWC_RATE   weight for regularization
-  --regular REGULAR     whether there is regularization
-  --random RANDOM       whether there is a random selection
-  --init INIT           init epoch for training
+  --ewc_rate EWC_RATE   weight for regularization(default:10)
+  --regular REGULAR     whether there is regularization(default:True)
+  --random RANDOM       whether there is a random selection(default:False)
+  --init INIT           init epoch for training(default:20)
 ```
 
 **Demo:**	
