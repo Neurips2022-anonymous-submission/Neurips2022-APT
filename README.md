@@ -8,7 +8,7 @@ This project is the implementation of paper "Better with Less: Data-Active Pre-t
 The script has been tested running under Python 3.7.10, with the following packages installed (along with their dependencies):
 
 - [PyTorch](https://pytorch.org/). Version >=1.4 required. You can find instructions to install from source [here](https://pytorch.org/get-started/previous-versions/).
-- [DGL](https://www.dgl.ai/). 0.5 > Version >=0.4.3 required.You can find instructions to install from source [here](https://www.dgl.ai/pages/start.html).
+- [DGL](https://www.dgl.ai/). 0.5 > Version >=0.4.3 required. You can find instructions to install from source [here](https://www.dgl.ai/pages/start.html).
 - [rdkit](https://anaconda.org/conda-forge/rdkit). Version = 2019.09.2 required. It can be easily installed with 
 			```conda install -c conda-forge rdkit=2019.09.2```
 - [Other Python modules](https://pypi.python.org). Some other Python module dependencies are listed in requirements.txt, which can be easily installed with pip:
