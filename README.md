@@ -2,17 +2,20 @@
 
 ## About
 
-This project is the implementation of the NIPS'22 paper "Better with Less: Data-Active Pre-training of Graph Neural Networks"
+This project is the implementation of paper "Better with Less: Data-Active Pre-training of Graph Neural Networks"
 
 ## Dependencies
 The script has been tested running under Python 3.7.10, with the following packages installed (along with their dependencies):
 
-- `PyTorch ≥ 1.4.0`
-- `0.5 > DGL ≥ 0.4.3`
-- `pip install -r requirements.txt`
-- `conda install -c conda-forge rdkit=2019.09.2`
+- [PyTorch](https://pytorch.org/). Version >=1.4 required. You can find instructions to install from source [here](https://pytorch.org/get-started/previous-versions/).
+- [DGL](https://www.dgl.ai/). 0.5 > Version >=0.4.3 required.You can find instructions to install from source [here](https://www.dgl.ai/pages/start.html).
+- [rdkit](https://anaconda.org/conda-forge/rdkit). Version = 2019.09.2 required. It can be easily installed with 
+			```conda install -c conda-forge rdkit=2019.09.2```
+- [Other Python modules](https://pypi.python.org). Some other Python module dependencies are listed in requirements.txt, which can be easily installed with pip:
 
-In addition, CUDA 10.0 has been used in our project. Although not all dependencies are mentioned in the installation instruction links above, you can find most of the libraries in the package repository of a regular Linux distribution
+	`pip install -r requirements.txt`
+
+In addition, CUDA 10.0 has been used in our project. Although not all dependencies are mentioned in the installation instruction links above, you can find most of the libraries in the package repository of a regular Linux distribution.
 
 
 ## File folders
@@ -29,7 +32,7 @@ In addition, CUDA 10.0 has been used in our project. Although not all dependenci
 ## Usage: How to run the code
 We divide it into 3 steps (1) Pre-training/Finetuning (2) Evaluating (3) Analyze the performance.
 
-### 1.Pre-training / Fine-tuning
+### 1. Pre-training / Fine-tuning
 
 Before running the actual pretraining commands, the code requires you to download the dataset. pre-training datasets is stored in `data.bin`. And the datasets can be download through [website](https://drive.google.com/file/d/1kbOciSHXSOAFV7X1CuL_nm9_2sxKeDfU/view).
 
@@ -44,9 +47,11 @@ python train_al.py \
   --dgl_file <dataset in bin format> \
   --moco
 ```
-For more detail, the help information of the main script can be obtain by executing command.
+For more detail, the help information of the main script `train_al.py` can be obtain by executing command.
 
 ```bash
+python train_al.py -h
+
 optional arguments:
   --max_period MAX_PERIOD
                         maximal period(default:6)
@@ -74,46 +79,59 @@ python train_al.py \
 
 **1.2 Fine-tuning**
 
-To Finetune APT on all downstream datasets in the background:
+
+To Finetune APT on all downstream datasets:
 
 ```
-nohup bash scripts/evaluate_generate.sh <saved file> > <log file> 2>&1 &
-```
-
-**Demo:**
-
-```
-nohup bash scripts/evaluate_generate.sh saved > result.out 2>&1 &
-```
-
-### 2.Evaluating
-
-**2.1 Evaluate without fine-tuning on all downstream datasets in the background:**
-
-```
-nohup bash evaluate.sh <load path> <gpu> > <log file> 2>&1 &
+bash scripts/evaluate_generate.sh <saved file> > <log file>
 ```
 
 **Demo:**
 
 ```
-nohup bash scripts/evaluate.sh saved 0 > log.out 2>&1 &
+bash scripts/evaluate_generate.sh saved > result.out
 ```
 
+### 2. Evaluating
 
-**2.2 Evaluate after fine-tuning on all downstream datasets in the background:**
+`generate.py` generate embeddings on single dataset. The help information of the main script `generate.py` can be obtain by executing command.
+
+```bash
+python generate.py -h
+
+optional arguments:
+  --load-path LOAD_PATH
+  --dataset Dataset
+  --gpu GPU  GPU id to use.
+```
+The embedding will be used for evaluation in node classification and graph classification. The script `evaluate.sh` and `evaluate_finetune.sh` are available to simplify the evaluation process.
+
+**2.1 Evaluate without fine-tuning on all downstream datasets:**
 
 ```
-nohup bash evaluate_finetune.sh <load path> <gpu> > <log file> 2>&1 &
+bash evaluate.sh <load path> <gpu> > <log file> 
 ```
 
 **Demo:**
 
 ```
-nohup bash scripts/evaluate_finetune.sh saved 0 > log.out 2>&1 &
+bash scripts/evaluate.sh saved 0 > log.out
 ```
 
-### 3.Analyze the performance
+
+**2.2 Evaluate after fine-tuning on all downstream datasets:**
+
+```
+bash evaluate_finetune.sh <load path> <gpu> > <log file> 
+```
+
+**Demo:**
+
+```
+bash scripts/evaluate_finetune.sh saved 0 > log.out
+```
+
+### 3. Performance analysis
 
 Analyze the performance from log file generated in `2.Evaluating` phase and save in csv format file.
 
@@ -123,7 +141,7 @@ python cope_result.py --file <log file>
 
 **Demo:**
 ```
-python cope_result.py --file test.out
+python cope_result.py --file log.out
 ```
 
 ## Acknowledgements
