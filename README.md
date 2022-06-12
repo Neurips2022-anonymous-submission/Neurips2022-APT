@@ -54,23 +54,28 @@ python train_al.py -h
 
 optional arguments:
   --max_period MAX_PERIOD
-                        maximal period(default:6)
+                        maximal period (default:6)
   --threshold THRESHOLD
-                        uncertainty threshold for choosing samples(default:3)
+                        uncertainty threshold for choosing samples (default:3)
   --threshold_g THRESHOLD_G
-                        threshold for moving to a new graph(default:3.5)
+                        threshold for moving to a new graph (default:3.5)
   --lay LAY             layer number
-  --ewc_rate EWC_RATE   weight for regularization(default:10)
-  --regular REGULAR     whether there is regularization(default:True)
-  --random RANDOM       whether there is a random selection(default:False)
-  --init INIT           init epoch for training(default:20)
+  --ewc_rate EWC_RATE   weight for regularization (default:10)
+  --regular REGULAR     whether there is regularization (default:True)
+  --random RANDOM       whether there is a random selection (default:False)
+  --init INIT           init epoch for training (default:20)
 ```
 
 **Demo:**	
 
 ```bash
 python train_al.py \
+  --max_period 6 \
   --threshold 3 \
+  --threshold_g 3.5 \
+  --lay 3 \
+  --ewc_rate 10 \
+  --regular 1 \
   --model-path saved \
   --tb-path tensorboard  \
   --dgl_file data.bin \
@@ -109,27 +114,27 @@ The embedding will be used for evaluation in node classification and graph class
 **2.1 Evaluate without fine-tuning on all downstream datasets:**
 
 ```
-bash evaluate.sh <load path> <gpu>
+bash evaluate.sh <load path>
 ```
 
 
 **Demo:**
 
 ```
-bash scripts/evaluate.sh saved 0
+bash scripts/evaluate.sh saved
 ```
 
 
 **2.2 Evaluate after fine-tuning on all downstream datasets:**
 
 ```
-bash evaluate_finetune.sh <load path> <gpu>
+bash evaluate_finetune.sh <load path>
 ```
 
 **Demo:**
 
 ```
-bash scripts/evaluate_finetune.sh saved 0
+bash scripts/evaluate_finetune.sh saved
 ```
 
 
