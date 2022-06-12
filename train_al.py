@@ -136,7 +136,7 @@ def parse_option():
     parser.add_argument("--alpha", type=float, default=0.999, help="exponential moving average weight")
 
     # GPU setting
-    parser.add_argument("--gpu", default=1, type=int, nargs='+', help="GPU id to use.")
+    parser.add_argument("--gpu", default=0, type=int, nargs='+', help="GPU id to use.")
 
     # cross validation
     parser.add_argument("--seed", type=int, default=0, help="random seed.")

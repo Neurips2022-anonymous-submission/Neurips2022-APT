@@ -30,7 +30,7 @@ In addition, CUDA 10.0 has been used in our project. Although not all dependenci
 
 
 ## Usage: How to run the code
-We divide it into 3 steps (1) Pre-training/Finetuning (2) Evaluating (3) Analyze the performance.
+We divide it into two steps (1) Pre-training/Finetuning (2) Evaluating.
 
 ### 1. Pre-training / Fine-tuning
 
@@ -47,7 +47,7 @@ python train_al.py \
   --dgl_file <dataset in bin format> \
   --moco
 ```
-For more detail, the help information of the main script `train_al.py` can be obtain by executing command.
+For more detail, the help information of the main script `train_al.py` can be obtain by executing the following command.
 
 ```bash
 python train_al.py -h
@@ -83,18 +83,18 @@ python train_al.py \
 To Finetune APT on all downstream datasets:
 
 ```
-bash scripts/evaluate_generate.sh <saved file> > <log file>
+bash scripts/evaluate_generate.sh <saved file>
 ```
 
 **Demo:**
 
 ```
-bash scripts/evaluate_generate.sh saved > result.out
+bash scripts/evaluate_generate.sh saved
 ```
 
 ### 2. Evaluating
 
-`generate.py` generate embeddings on single dataset. The help information of the main script `generate.py` can be obtain by executing command.
+`generate.py` file helps generate embeddings on a specific dataset. The help information of the main script `generate.py` can be obtain by executing the following command.
 
 ```bash
 python generate.py -h
@@ -109,40 +109,29 @@ The embedding will be used for evaluation in node classification and graph class
 **2.1 Evaluate without fine-tuning on all downstream datasets:**
 
 ```
-bash evaluate.sh <load path> <gpu> > <log file> 
+bash evaluate.sh <load path> <gpu>
 ```
+
 
 **Demo:**
 
 ```
-bash scripts/evaluate.sh saved 0 > log.out
+bash scripts/evaluate.sh saved 0
 ```
 
 
 **2.2 Evaluate after fine-tuning on all downstream datasets:**
 
 ```
-bash evaluate_finetune.sh <load path> <gpu> > <log file> 
+bash evaluate_finetune.sh <load path> <gpu>
 ```
 
 **Demo:**
 
 ```
-bash scripts/evaluate_finetune.sh saved 0 > log.out
+bash scripts/evaluate_finetune.sh saved 0
 ```
 
-### 3. Performance analysis
-
-Analyze the performance from log file generated in `2.Evaluating` phase and save in csv format file.
-
-```
-python cope_result.py --file <log file>
-```
-
-**Demo:**
-```
-python cope_result.py --file log.out
-```
 
 ## Acknowledgements
 Part of this code is inspired by Qiu et al.'s [GCC: Graph Contrastive Coding](https://github.com/THUDM/GCC).

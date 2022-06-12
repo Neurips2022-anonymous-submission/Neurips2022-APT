@@ -134,7 +134,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser("argument for training")
     # fmt: off
     parser.add_argument("--load-path",
-                        default="saved_compare_2_1_new/GCC_perturb_16384_0.001_self/current.pth")
+                        default="saved/GCC_perturb_16384_0.001_self/current.pth")
     parser.add_argument("--dataset", type=str, default="imdb-binary",
                         choices=["dgl", "wikipedia", "blogcatalog", "usa_airport", "brazil_airport", "europe_airport",
                                  "cora", "citeseer", "pubmed", "squirrel", "texas", "cornell", "wisconsin", "youtube",
@@ -143,7 +143,7 @@ if __name__ == "__main__":
                                  "h-index-rand-1", "h-index-top-1", "h-index", "polblogs", "DD242", "DD68", "DD687",
                                  "academia", "p2p25",
                                  "gene"] + GRAPH_CLASSIFICATION_DSETS)
-    parser.add_argument("--gpu", default="3", type=int, help="GPU id to use.")
+    parser.add_argument("--gpu", default="0", type=int, help="GPU id to use.")
     parser.add_argument("--num-workers", type=int, default=1, help="num of workers to use")
     parser.add_argument("--num-copies", type=int, default=1, help="num of dataset copies that fit in memory")
     # fmt: on
